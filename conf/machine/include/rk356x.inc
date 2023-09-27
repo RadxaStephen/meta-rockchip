@@ -2,7 +2,7 @@
 # Released under the MIT license (see COPYING.MIT for the terms)
 
 SOC_FAMILY ?= "rk3568"
-PREFERRED_VERSION_linux-rockchip ?= "5.10%"
+PREFERRED_VERSION_linux-rockchip ?= "6.1%"
 LINUXLIBCVERSION ?= "5.10-custom%"
 
 require conf/machine/include/rockchip-arm64-common.inc

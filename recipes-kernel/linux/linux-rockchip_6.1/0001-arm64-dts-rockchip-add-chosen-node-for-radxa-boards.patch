@@ -1,0 +1,112 @@
+From 209c3e55ec5c1524aa869bf994df4ca5c84becfb Mon Sep 17 00:00:00 2001
+From: Stephen Chen <stephen@radxa.com>
+Date: Tue, 8 Aug 2023 10:29:04 +0800
+Subject: [PATCH] arm64: dts: rockchip: add chosen node for radxa boards
+
+Signed-off-by: Stephen Chen <stephen@radxa.com>
+
+diff --git a/arch/arm64/boot/dts/rockchip/rk3399-rock-pi-4.dtsi b/arch/arm64/boot/dts/rockchip/rk3399-rock-pi-4.dtsi
+index d9254a4bd3a6b..b71276d8541eb 100644
+--- a/arch/arm64/boot/dts/rockchip/rk3399-rock-pi-4.dtsi
++++ b/arch/arm64/boot/dts/rockchip/rk3399-rock-pi-4.dtsi
+@@ -11,6 +11,10 @@
+ #include "rk3399-linux.dtsi"
+ 
+ / {
++	chosen {
++		bootargs = "earlycon=uart8250,mmio32,0xff1a0000 console=ttyFIQ0 rw root=PARTUUID=614e0000-0000 rootfstype=ext4 rootwait coherent_pool=1m";
++	};
++
+ 	clkin_gmac: external-gmac-clock {
+ 		compatible = "fixed-clock";
+ 		clock-frequency = <125000000>;
+diff --git a/arch/arm64/boot/dts/rockchip/rk3566-radxa-cm3.dtsi b/arch/arm64/boot/dts/rockchip/rk3566-radxa-cm3.dtsi
+index d7daa56768965..230d3e0ff1398 100644
+--- a/arch/arm64/boot/dts/rockchip/rk3566-radxa-cm3.dtsi
++++ b/arch/arm64/boot/dts/rockchip/rk3566-radxa-cm3.dtsi
+@@ -19,8 +19,6 @@
+ / {
+ 	compatible = "radxa,cm3", "rockchip,rk3566";
+ 
+-	/delete-node/ chosen;
+-
+ 	aliases {
+ 		mmc0 = &sdmmc0;
+ 		mmc1 = &sdhci;
+diff --git a/arch/arm64/boot/dts/rockchip/rk3568-rock-3a.dts b/arch/arm64/boot/dts/rockchip/rk3568-rock-3a.dts
+index 1da13900fb675..a6c1b5f3852c6 100644
+--- a/arch/arm64/boot/dts/rockchip/rk3568-rock-3a.dts
++++ b/arch/arm64/boot/dts/rockchip/rk3568-rock-3a.dts
+@@ -18,6 +18,10 @@ / {
+ 	model = "Radxa ROCK3 Model A";
+ 	compatible = "radxa,rock-3a", "rockchip,rk3568";
+ 
++	chosen: chosen {
++		bootargs = "earlycon=uart8250,mmio32,0xfe660000 console=ttyFIQ0 root=PARTUUID=614e0000-0000 rw rootwait";
++	};
++
+ 	fan0: pwm-fan {
+ 		compatible = "pwm-fan";
+ 		#cooling-cells = <2>;
+diff --git a/arch/arm64/boot/dts/rockchip/rk3588-rock-5b-v11.dts b/arch/arm64/boot/dts/rockchip/rk3588-rock-5b-v11.dts
+index 912c175ad02b7..1e7071f229b8b 100644
+--- a/arch/arm64/boot/dts/rockchip/rk3588-rock-5b-v11.dts
++++ b/arch/arm64/boot/dts/rockchip/rk3588-rock-5b-v11.dts
+@@ -22,8 +22,6 @@ / {
+ 	model = "Radxa ROCK 5B";
+ 	compatible = "radxa,rock-5b", "rockchip,rk3588";
+ 
+-	/delete-node/ chosen;
+-
+ 	vcc12v_dcin: vcc12v-dcin {
+ 		compatible = "regulator-fixed";
+ 		regulator-name = "vcc12v_dcin";
+diff --git a/arch/arm64/boot/dts/rockchip/rk3588-rock-5b.dts b/arch/arm64/boot/dts/rockchip/rk3588-rock-5b.dts
+index 5edf60c77bb9b..1c017026f464c 100644
+--- a/arch/arm64/boot/dts/rockchip/rk3588-rock-5b.dts
++++ b/arch/arm64/boot/dts/rockchip/rk3588-rock-5b.dts
+@@ -24,8 +24,6 @@ / {
+ 	model = "Radxa ROCK 5B";
+ 	compatible = "radxa,rock-5b", "rockchip,rk3588";
+ 
+-	/delete-node/ chosen;
+-
+ 	fan0: pwm-fan {
+ 		compatible = "pwm-fan";
+ 		#cooling-cells = <2>;
+diff --git a/arch/arm64/boot/dts/rockchip/rk3588s-radxa-nx5-module.dtsi b/arch/arm64/boot/dts/rockchip/rk3588s-radxa-nx5-module.dtsi
+index c6730abc83a4c..a520c3a9a101e 100644
+--- a/arch/arm64/boot/dts/rockchip/rk3588s-radxa-nx5-module.dtsi
++++ b/arch/arm64/boot/dts/rockchip/rk3588s-radxa-nx5-module.dtsi
+@@ -28,8 +28,6 @@ aliases {
+ 		mmc2 = &sdio;
+ 	};
+ 
+-	/delete-node/ chosen;
+-
+ 	vcc12v_dcin: vcc12v-dcin {
+ 		compatible = "regulator-fixed";
+ 		regulator-name = "vcc12v_dcin";
+@@ -341,4 +339,4 @@ rtc_int: rtc-int {
+ 			rockchip,pins = <0 RK_PB0 RK_FUNC_GPIO &pcfg_pull_none>;
+ 		};
+ 	};
+-};
+\ No newline at end of file
++};
+diff --git a/arch/arm64/boot/dts/rockchip/rk3588s-rock-5a.dts b/arch/arm64/boot/dts/rockchip/rk3588s-rock-5a.dts
+index 245cc0462a64c..25b1e38007804 100644
+--- a/arch/arm64/boot/dts/rockchip/rk3588s-rock-5a.dts
++++ b/arch/arm64/boot/dts/rockchip/rk3588s-rock-5a.dts
+@@ -23,8 +23,6 @@ / {
+ 	model = "Radxa ROCK 5A";
+ 	compatible = "radxa,rock-5a", "rockchip,rk3588";
+ 
+-	/delete-node/ chosen;
+-
+ 	fan0: pwm-fan {
+ 		compatible = "pwm-fan";
+ 		#cooling-cells = <2>;
+-- 
+2.29.0
+
