@@ -43,8 +43,6 @@ jobs:
           bitbake-layers add-layer ../meta-openembedded/meta-oe
           bitbake-layers add-layer ../meta-openembedded/meta-python
           bitbake-layers add-layer ../meta-openembedded/meta-networking
-          bitbake-layers add-layer ../meta-openembedded/meta-filesystems
-          bitbake-layers add-layer ../meta-virtualization
 
           export LC_ALL="en_US.UTF-8"
 
