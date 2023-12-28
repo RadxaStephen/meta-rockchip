@@ -25,6 +25,7 @@ In order to build an image with BSP support for a given release, you need to dow
 ~/yocto $ git clone git://git.yoctoproject.org/meta-arm -b nanbield
 ~/yocto $ git clone git://git.openembedded.org/meta-openembedded -b nanbield
 ~/yocto $ git clone git@github.com:radxa/meta-rockchip.git -b nanbield
+~/yocto $ git clone git://git.yoctoproject.org/meta-virtualization -b nanbield
 ```
 
 Then you need to source the configuration script:
@@ -47,6 +48,8 @@ BBLAYERS ?= " \
   ${TOPDIR}/../meta-openembedded/meta-python \
   ${TOPDIR}/../meta-openembedded/meta-networking \
   ${TOPDIR}/../meta-rockchip \
+  ${TOPDIR}/../meta-openembedded/meta-filesystems \
+  ${TOPDIR}/../meta-virtualization \
   "
 ```
 
