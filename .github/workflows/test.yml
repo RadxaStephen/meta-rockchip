@@ -1,0 +1,54 @@
+name: Build and release
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - nanbield-test
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 0
+      - name: Build
+        run: |
+
+          sudo apt-get update
+          sudo apt install -y gawk wget git diffstat unzip texinfo gcc build-essential \
+            chrpath socat cpio python3 python3-pip python3-pexpect xz-utils \
+            debianutils iputils-ping python3-git python3-jinja2 libegl1-mesa \
+            libsdl1.2-dev pylint xterm python3-subunit mesa-common-dev zstd liblz4-tool
+
+
+          mkdir yocto; cd yocto
+          git clone git://git.openembedded.org/bitbake -b master
+          git clone git://git.openembedded.org/openembedded-core -b nanbield
+          git clone git://git.yoctoproject.org/meta-arm -b nanbield
+          git clone git://git.openembedded.org/meta-openembedded -b nanbield
+          git clone git@github.com:radxa/meta-rockchip.git -b nanbield
+          git clone git://git.yoctoproject.org/meta-virtualization -b nanbield
+
+          source openembedded-core/oe-init-build-env build
+          bitbake-layers add-layer ../openembedded-core/meta
+          bitbake-layers add-layer ../meta-arm/meta-arm-toolchain
+          bitbake-layers add-layer ../meta-arm/meta-arm
+          bitbake-layers add-layer ../meta-rockchip
+          bitbake-layers add-layer ../meta-openembedded/meta-oe
+          bitbake-layers add-layer ../meta-openembedded/meta-python
+          bitbake-layers add-layer ../meta-openembedded/meta-networking
+          bitbake-layers add-layer ../meta-openembedded/meta-filesystems
+          bitbake-layers add-layer ../meta-virtualization
+
+          export LC_ALL="en_US.UTF-8"
+
+          for m in rock-5a
+          do
+            MACHINE=$m bitbake core-image-full-cmdline
+          done
