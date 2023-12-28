@@ -32,7 +32,7 @@ jobs:
           git clone git://git.openembedded.org/openembedded-core -b nanbield
           git clone git://git.yoctoproject.org/meta-arm -b nanbield
           git clone git://git.openembedded.org/meta-openembedded -b nanbield
-          git clone git@github.com:radxa/meta-rockchip.git -b nanbield
+          git clone https://github.com/RadxaStephen/meta-rockchip.git -b nanbield-test
           git clone git://git.yoctoproject.org/meta-virtualization -b nanbield
 
           source openembedded-core/oe-init-build-env build
